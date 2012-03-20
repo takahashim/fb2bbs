@@ -224,11 +224,11 @@
             <ul class="friends">
               <% @groups.each do |group| %>
                 <li>
+                  <a href="/?group_id=<%= group['id']  %>">go</a> |
                   <a href="#" onclick="window.open('http://www.facebook.com/<%= group['id'] %>')">
                     <img src="https://graph.facebook.com/<%= group['id'] %>" alt="<%= group['name'] %>">
                     <%= group['name'] %>
                   </a>
-                  | <a href="/?group_id=<%= group['id']  %>">go</a>
                 </li>
               <% end %>
             </ul>
