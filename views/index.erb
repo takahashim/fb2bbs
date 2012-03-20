@@ -170,8 +170,20 @@
         </section>
     <section id="samples2" class="clearfix">
       <h1>Group</h1>
-      <%= @group.inspect%>
-      <%= @group_conn.inspect%>
+      <div>
+        <h3><%= @group['name']%></h3>
+        <img src="<%= @group['icon']%>" />
+        <div>
+          <%= @group['description']%>
+        </div>
+      </div>
+      <ul>
+        <% @group_conn.each do |conn| %>
+        <li>
+          <%= conn["message"]%>
+        </li>
+        <% end %>
+      </ul>
     </section>
     <% end %>
 
