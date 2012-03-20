@@ -220,13 +220,13 @@
           </div>
 
           <div class="list">
-            <h3>Friends using this app</h3>
+            <h3>Groups</h3>
             <ul class="friends">
-              <% @friends_using_app.each do |friend_result| %>
+              <% @groups.each do |group| %>
                 <li>
-                  <a href="#" onclick="window.open('http://www.facebook.com/<%= friend_result['uid'] %>')">
-                    <img src="<%= friend_result['pic_square'] %>" alt="<%= friend_result['name'] %>">
-                    <%= friend_result['name'] %>
+                  <a href="#" onclick="window.open('http://www.facebook.com/<%= group['id'] %>')">
+                    <img src="https://graph.facebook.com/<%= group['id'] %>" alt="<%= group['name'] %>">
+                    <%= group['name'] %>
                   </a>
                 </li>
               <% end %>
