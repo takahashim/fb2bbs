@@ -23,6 +23,9 @@ before do
   if settings.environment == :production && request.scheme != 'https'
     redirect "https://#{request.env['HTTP_HOST']}"
   end
+  # Koala.http_service.http_options = {
+  #    :ssl => { :ca_path => "/opt/local/share/curl/curl-ca-bundle.crt" }
+  # }
 end
 
 helpers do
