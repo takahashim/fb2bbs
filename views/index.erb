@@ -184,6 +184,8 @@
         <% @group_conn.each do |conn| %>
         <li>
           <%= conn["message"]%>
+          (<%= conn["comments"]["count"]%>)
+          [<%= conn["created_time"].to_s.slice(0,10)%>]
         </li>
         <% end %>
       </ul>
