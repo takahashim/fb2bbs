@@ -228,11 +228,16 @@
                     <img src="https://graph.facebook.com/<%= group['id'] %>" alt="<%= group['name'] %>">
                     <%= group['name'] %>
                   </a>
+                  | <a href="/?group_id=<%= group['id']  %>">go</a>
                 </li>
               <% end %>
             </ul>
           </div>
         </section>
+    <section id="samples2" class="clearfix">
+      <h1>Group</h1>
+      <%= @group.inspect%>
+    </section>
     <% end %>
 
 

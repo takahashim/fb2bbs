@@ -68,6 +68,11 @@ get "/" do
     @likes   = @graph.get_connections('me', 'likes').first(4)
     @groups  = @graph.get_connections('me', 'groups').first(10)
 
+    @group_id = params[:group_id]
+    if @group_id
+      @group = @graph.get_object(@group_id)
+    end
+
     # for other data you can always run fql
     @friends_using_app = @graph.fql_query("SELECT uid, name, is_app_user, pic_square FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
   end
