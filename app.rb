@@ -71,6 +71,7 @@ get "/" do
     @group_id = params[:group_id]
     if @group_id
       @group = @graph.get_object(@group_id)
+      @group_conn = @graph.get_connections(@group_id, 'feed')
     end
 
     # for other data you can always run fql
