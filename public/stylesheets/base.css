@@ -185,7 +185,8 @@ header .tagline {
 /* =guides/samples spacing
 --------------------------------------------- */
 #guides h1,
-#samples h1 {
+#samples1 h1,#samples2 h1 {
+  border-top: 1px solid #333333;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -264,11 +265,9 @@ header .tagline {
   border-top: 1px solid #fff;
 }
 
-#samples h3 {
-  background: url("../images/header-sketch.png") no-repeat;
-  color: #646464;
+#samples2 h3 {
+  color: #f86464;
   font-weight: bold;
-  font-size: 11px;
   line-height: 29px;
   text-align: center;
 }
@@ -339,6 +338,9 @@ header .tagline {
   text-indent: -9999px;
 }
 
+ol, ul {
+  list-style: disc;
+}
 
 /* ------------------------------------------ */
 

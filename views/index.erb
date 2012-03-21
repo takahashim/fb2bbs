@@ -159,10 +159,10 @@
             <ul class="friends">
               <% @groups.each do |group| %>
                 <li>
-                  <a href="/?group_id=<%= group['id']  %>">go</a> |
                   <a href="#" onclick="window.open('http://www.facebook.com/<%= group['id'] %>')">
                     <%= group['name'] %>
-                  </a>
+                  </a> |
+                  <a href="/?group_id=<%= group['id']  %>">詳細</a>
                 </li>
               <% end %>
             </ul>
@@ -172,8 +172,7 @@
       <h1>Group</h1>
       <% if @group %>
       <div>
-        <h3><%= @group['name']%></h3>
-        <img src="<%= @group['icon']%>" />
+        <h3><img src="<%= @group['icon']%>" /><%= @group['name']%></h3>
         <div>
           <%= @group['description']%>
         </div>
