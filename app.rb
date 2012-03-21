@@ -18,14 +18,18 @@ unless ENV["FACEBOOK_APP_ID"] && ENV["FACEBOOK_SECRET"]
   abort("missing env vars: please set FACEBOOK_APP_ID and FACEBOOK_SECRET with your app credentials")
 end
 
+
+if settings.environment != :production
+  Koala.http_service.http_options = {
+     :ssl => {:verify => false}
+  }
+end
+
 before do
   # HTTPS redirect
   if settings.environment == :production && request.scheme != 'https'
     redirect "https://#{request.env['HTTP_HOST']}"
   end
-  # Koala.http_service.http_options = {
-  #    :ssl => { :ca_path => "/opt/local/share/curl/curl-ca-bundle.crt" }
-  # }
 end
 
 helpers do
