@@ -182,7 +182,14 @@
       <ul>
         <% @group_conn.each do |conn| %>
         <li>
-          <%= conn["message"]%>
+          <%= conn["message"]%><br />
+          <% if conn["picture"] %>
+          <img src="<%= conn["picture"]%>" />
+          <% end %>
+          <% if conn["name"]%>
+          <a href="<%= conn['link']%>"><%= conn["name"]%></a>
+          <%= conn["description"]%><br />
+          <% end %>
           (<%= conn["comments"]["count"]%>)
           [<%= conn["created_time"].to_s.slice(0,10)%>]
         </li>
