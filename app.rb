@@ -59,6 +59,23 @@ helpers do
     @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
   end
 
+  def get_users(conn)
+    user_ids = []
+    conn.each do |item|
+      if item["from"]
+        user_ids << item["from"]["id"]
+      end
+    end
+    users_str = user_ids.join(",")
+    query = "select uid,name,pic_square from user where uid in (#{users_str}) ;"
+    result = @graph.fql_query(query)
+    users = {}
+    result.each do |user|
+      users[user["uid"].to_s] = user
+    end
+    users
+  end
+
 end
 
 # the facebook session expired! reset ours and restart the process
@@ -80,11 +97,14 @@ get "/" do
     @photos  = @graph.get_connections('me', 'photos')
     @likes   = @graph.get_connections('me', 'likes').first(4)
     @groups  = @graph.get_connections('me', 'groups').first(10)
+    @posters   = {}
 
     @group_id = params[:group_id]
     if @group_id
       @group = @graph.get_object(@group_id)
       @group_conn = @graph.get_connections(@group_id, 'feed')
+
+      @posters = get_users(@group_conn)
     end
 
     # for other data you can always run fql

@@ -188,6 +188,13 @@
       <ul>
         <% @group_conn.each do |conn| %>
         <li>
+          <% if conn["from"] %>
+            <%= conn["from"]["name"] %>
+            (<%= conn["from"]["id"] %>)
+            <% if @posters[conn["from"]["id"]] && @posters[conn["from"]["id"]]["pic_square"]%>
+              <img src="<%= @posters[conn["from"]["id"]]["pic_square"] %>" />
+            <% end %>
+          <% end %>
           <%= conn["message"]%><br />
           <% if conn["picture"] %>
           <img src="<%= conn["picture"]%>" />
