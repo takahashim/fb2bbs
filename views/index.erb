@@ -177,6 +177,12 @@
           <%= @group['description']%>
         </div>
       </div>
+      <form method="post" action="/wall">
+        <input type="hidden" name="group_id" value="<%= @group['id'] %>" />
+        message: <input type="text" name="message" /><br />
+        link URL: <input type="text" name="link" />
+        <input type="submit" name="post" />
+      </form>
       <% end %>
       <% if @group_conn %>
       <ul>

@@ -98,6 +98,33 @@ post "/" do
   redirect "/"
 end
 
+# used by Canvas apps - redirect the POST to be a regular GET
+post "/wall" do
+
+  # Get base API Connection
+  @graph  = Koala::Facebook::API.new(session[:access_token])
+
+  # Get public details of current application
+  @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+
+  if session[:access_token]
+    @user    = @graph.get_object("me")
+
+    @group_id = params[:group_id]
+    logger.info "@group_id=#{@group_id}"
+
+    if @group_id
+      @group = @graph.get_object(@group_id)
+      logger.info "@group=#{@group}"
+
+      @graph.put_object(@group_id, "feed", :message=>params[:message], :link=>params[:link])
+      redirect "/?group_id=#{@group_id}"
+    end
+
+  end
+  redirect '/'
+end
+
 # used to close the browser window opened to post to wall/send to friends
 get "/close" do
   "<body onload='window.close();'/>"
@@ -110,7 +137,8 @@ end
 
 get "/auth/facebook" do
   session[:access_token] = nil
-  redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+##  redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+  redirect authenticator.url_for_oauth_code(:permissions => "publish_stream")
 end
 
 get '/auth/facebook/callback' do
