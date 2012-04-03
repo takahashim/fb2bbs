@@ -5,6 +5,8 @@ enable :sessions
 set :raise_errors, false
 set :show_exceptions, false
 
+use Rack::Logger
+
 # Scope defines what permissions that we are asking the user to grant.
 # In this example, we are asking for the ability to publish stories
 # about using the app, access to what the user likes, and to be able
@@ -33,6 +35,10 @@ before do
 end
 
 helpers do
+  def logger
+    request.logger
+  end
+
   def host
     request.env['HTTP_HOST']
   end
