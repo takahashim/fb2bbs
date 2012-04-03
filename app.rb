@@ -102,7 +102,7 @@ get "/" do
     @group_id = params[:group_id]
     if @group_id
       @group = @graph.get_object(@group_id)
-      @group_conn = @graph.get_connections(@group_id, 'feed')
+      @group_conn = @graph.get_connections(@group_id, 'feed',{'limit'=>50})
 
       @posters = get_users(@group_conn)
     end
